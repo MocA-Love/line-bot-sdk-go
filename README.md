@@ -1,11 +1,5 @@
 # LINE Messaging API SDK for Go MaguRo Ed.
 
-[![Build Status](https://github.com/MocA-Love/line-bot-sdk-go/actions/workflows/go.yml/badge.svg?branch=master)](https://github.com/MocA-Love/line-bot-sdk-go/actions)
-[![codecov](https://codecov.io/gh/line/line-bot-sdk-go/branch/master/graph/badge.svg)](https://codecov.io/gh/line/line-bot-sdk-go)
-[![Go Reference](https://pkg.go.dev/badge/github.com/MocA-Love/line-bot-sdk-go/v8/linebot.svg)](https://pkg.go.dev/github.com/MocA-Love/line-bot-sdk-go/v8/linebot)
-[![Go Report Card](https://goreportcard.com/badge/github.com/MocA-Love/line-bot-sdk-go)](https://goreportcard.com/report/github.com/MocA-Love/line-bot-sdk-go)
-
-
 ## Introduction
 The LINE Messaging API SDK for Go makes it easy to develop bots using LINE Messaging API, and you can create a sample bot within minutes.
 **Customized for personalized ease of use**
