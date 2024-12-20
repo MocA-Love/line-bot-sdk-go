@@ -1,19 +1,50 @@
 # LINE Messaging API SDK for Go MaguRo Ed.
 
-[![Build Status](https://github.com/MocA-Love/line-bot-sdk-go/actions/workflows/go.yml/badge.svg?branch=master)](https://github.com/MocA-Love/line-bot-sdk-go/actions)
-[![codecov](https://codecov.io/gh/line/line-bot-sdk-go/branch/master/graph/badge.svg)](https://codecov.io/gh/line/line-bot-sdk-go)
-[![Go Reference](https://pkg.go.dev/badge/github.com/MocA-Love/line-bot-sdk-go/v8/linebot.svg)](https://pkg.go.dev/github.com/MocA-Love/line-bot-sdk-go/v8/linebot)
-[![Go Report Card](https://goreportcard.com/badge/github.com/MocA-Love/line-bot-sdk-go)](https://goreportcard.com/report/github.com/MocA-Love/line-bot-sdk-go)
-
-
 ## Introduction
-The LINE Messaging API SDK for Go makes it easy to develop bots using LINE Messaging API, and you can create a sample bot within minutes.
-Customized for personalized ease of use
 
+The official SDK recommends using an OpenAPI-based client, so new features like
+"QuoteToken" aren't supported in rawEventMessage. For various reasons, I can't
+use an OpenAPI-based client yet, so I decided to implement it myself.
 
-## Diff
+The LINE Messaging API SDK for Go makes it easy to develop bots using LINE
+Messaging API, and you can create a sample bot within minutes.
+
+## Custom-Implemented Features
+
 - Support QuotedMessageID
+
+```go
+func demo(event *linebot.Event) {
+	message := event.Message.(*linebot.TextMessage)
+	fmt.Println(message.QuotedMessageID)
+}
+```
+
 - Support QuoteToken
+
+```go
+func demo(event *linebot.Event) {
+	message := event.Message.(*linebot.TextMessage)
+	fmt.Println(message.QuoteToken)
+}
+```
+
+- Support Mention (isSelf)
+
+```go
+func demo(event *linebot.Event) {
+	message := event.Message.(*linebot.TextMessage)
+	if message.Mention == nil {
+		return
+	}
+
+	for _, mention := range message.Mention.Mentionees {
+		if mention.IsSelf {
+			fmt.Println("mentioned self !!")
+		}
+	}
+}
+```
 
 ## Documentation
 
@@ -26,13 +57,14 @@ See the official API documentation for more information.
 
 This library requires Go 1.23 or later.
 
-## Installation ##
+## Installation
 
 ```sh
 $ go get -u github.com/MocA-Love/line-bot-sdk-go/v8/linebot
 ```
 
-## Import all packages in your code ##
+## Import all packages in your code
+
 ```go
 import (
 	"github.com/MocA-Love/line-bot-sdk-go/v8/linebot"
@@ -46,10 +78,9 @@ import (
 	"github.com/MocA-Love/line-bot-sdk-go/v8/linebot/shop"
 	"github.com/MocA-Love/line-bot-sdk-go/v8/linebot/webhook"
 )
-
 ```
 
-## Configuration ##
+## Configuration
 
 ```go
 import (
@@ -62,13 +93,13 @@ func main() {
 	)
 	...
 }
-
 ```
 
-### Configuration with http.Client ###
+### Configuration with http.Client
 
-Every client application allows configuration with WithHTTPClient and WithEndpoint.
-(For Blob client, configurations WithBlobHTTPClient and WithBlobEndpoint are also available.)
+Every client application allows configuration with WithHTTPClient and
+WithEndpoint. (For Blob client, configurations WithBlobHTTPClient and
+WithBlobEndpoint are also available.)
 
 ```go
 client := &http.Client{}
@@ -79,9 +110,12 @@ bot, err := messaging_api.NewMessagingApiAPI(
 ...
 ```
 
-## Getting Started ##
+## Getting Started
 
-The LINE Messaging API primarily utilizes the JSON data format. To parse the incoming HTTP requests, the `webhook.ParseRequest()` method is provided. This method reads the `*http.Request` content and returns a slice of pointers to Event Objects.
+The LINE Messaging API primarily utilizes the JSON data format. To parse the
+incoming HTTP requests, the `webhook.ParseRequest()` method is provided. This
+method reads the `*http.Request` content and returns a slice of pointers to
+Event Objects.
 
 ```go
 import (
@@ -94,8 +128,11 @@ if err != nil {
 }
 ```
 
-The LINE Messaging API is capable of handling various event types. The Messaging API SDK automatically unmarshals these events into respective classes like `webhook.MessageEvent`, `webhook.FollowEvent`, and so on. You can easily check the type of the event and respond accordingly using a switch statement as shown below:
-
+The LINE Messaging API is capable of handling various event types. The Messaging
+API SDK automatically unmarshals these events into respective classes like
+`webhook.MessageEvent`, `webhook.FollowEvent`, and so on. You can easily check
+the type of the event and respond accordingly using a switch statement as shown
+below:
 
 ```go
 for _, event := range cb.Events {
@@ -109,17 +146,19 @@ for _, event := range cb.Events {
 ```
 
 We provide code [examples](./examples).
+
 - [EchoBot](./examples/echo_bot/server.go)
   - a simple echo bot
 - [KitchenSink](./examples/kitchensink/server.go)
   - a bot that handles many types of events
 - [EchoBotHandler](./examples/echo_bot_handler/server.go)
-  - A simple bot that automatically verifies signatures and only handles Webhook events
+  - A simple bot that automatically verifies signatures and only handles Webhook
+    events
 - [DeliveryHelper](./examples/delivery_helper/main.go)
 - [InsightHelper](./examples/insight_helper/main.go)
 - [RichmenuHelper](./examples/richmenu_helper/main.go)
 
-### Receiver ###
+### Receiver
 
 To send a message to a user, group, or room, you need either an ID
 
@@ -135,7 +174,7 @@ or a reply token.
 replyToken := event.ReplyToken
 ```
 
-### Create message ###
+### Create message
 
 The LINE Messaging API provides various types of message.
 
@@ -152,9 +191,9 @@ bot.ReplyMessage(
 )
 ```
 
-### Send message ###
+### Send message
 
-With an ID, you can send message using ```PushMessage()```
+With an ID, you can send message using `PushMessage()`
 
 ```go
 bot.PushMessage(
@@ -170,7 +209,7 @@ bot.PushMessage(
 )
 ```
 
-With a reply token, you can reply to messages using ```ReplyMessage()```
+With a reply token, you can reply to messages using `ReplyMessage()`
 
 ```go
 bot.ReplyMessage(
@@ -185,8 +224,12 @@ bot.ReplyMessage(
 )
 ```
 
-### How to get response header and error message ###
-You may need to store the ```x-line-request-id``` header obtained as a response from several APIs. In this case, please use ```~WithHttpInfo```. You can get headers and status codes. The ```x-line-accepted-request-id``` or ```content-type``` header can also be obtained in the same way.
+### How to get response header and error message
+
+You may need to store the `x-line-request-id` header obtained as a response from
+several APIs. In this case, please use `~WithHttpInfo`. You can get headers and
+status codes. The `x-line-accepted-request-id` or `content-type` header can also
+be obtained in the same way.
 
 ```go
 resp, _, _ := app.bot.ReplyMessageWithHttpInfo(
@@ -200,10 +243,9 @@ resp, _, _ := app.bot.ReplyMessageWithHttpInfo(
 	}, 
 )
 log.Printf("status code: (%v), x-line-request-id: (%v)", resp.StatusCode, resp.Header.Get("x-line-request-id"))
-
 ```
 
-Similarly, you can get specific error messages by using ```~WithHttpInfo```.
+Similarly, you can get specific error messages by using `~WithHttpInfo`.
 
 ```go
 resp, _, err := app.bot.ReplyMessageWithHttpInfo(
@@ -232,17 +274,15 @@ FAQ: https://developers.line.biz/en/faq/
 
 News: https://developers.line.biz/en/news/
 
-
 ## Versioning
+
 This project respects semantic versioning.
 
 See http://semver.org/
 
-
 ## Contributing
 
 Please check [CONTRIBUTING](CONTRIBUTING.md) before making a contribution.
-
 
 ## License
 
