@@ -1,0 +1,32 @@
+name: Nil Check
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  static-analysis:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.23.4' # 必要なバージョンを指定
+
+      - name: Initialize go
+        run: go install go.uber.org/nilaway/cmd/nilaway@latest
+
+      - name: Run Nilaway
+        run: |
+          if nilaway ./...; then
+            echo -e "\033[32mStatic analysis completed successfully\033[0m"
+          else
+            echo -e "\033[31mIssues detected during static analysis\033[0m"
+            exit 1
+          fi
