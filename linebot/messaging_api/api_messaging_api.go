@@ -697,8 +697,12 @@ func (client *MessagingApiAPI) GetAggregationUnitNameListWithHttpInfo(
 	}
 
 	query := url.Values{}
-	query.Add("limit", limit)
-	query.Add("start", start)
+	if limit != "" {
+		query.Add("limit", limit)
+	}
+	if start != "" {
+		query.Add("start", start)
+	}
 
 	req.URL.RawQuery = query.Encode()
 
@@ -936,7 +940,9 @@ func (client *MessagingApiAPI) GetFollowersWithHttpInfo(
 	}
 
 	query := url.Values{}
-	query.Add("start", start)
+	if start != "" {
+		query.Add("start", start)
+	}
 	query.Add("limit", strconv.FormatInt(int64(limit), 10))
 
 	req.URL.RawQuery = query.Encode()
@@ -1164,7 +1170,9 @@ func (client *MessagingApiAPI) GetGroupMembersIdsWithHttpInfo(
 	}
 
 	query := url.Values{}
-	query.Add("start", start)
+	if start != "" {
+		query.Add("start", start)
+	}
 
 	req.URL.RawQuery = query.Encode()
 
@@ -2561,7 +2569,9 @@ func (client *MessagingApiAPI) GetRoomMembersIdsWithHttpInfo(
 	}
 
 	query := url.Values{}
-	query.Add("start", start)
+	if start != "" {
+		query.Add("start", start)
+	}
 
 	req.URL.RawQuery = query.Encode()
 
@@ -3443,7 +3453,7 @@ func (client *MessagingApiAPI) ReplyMessageWithHttpInfo(
 
 // RichMenuBatch
 //
-// You can use this endpoint to batch control the rich menu linked to the users using the endpoint such as Link rich menu to user.  The following operations are available:  1. Replace a rich menu with another rich menu for all users linked to a specific rich menu 2. Unlink a rich menu for all users linked to a specific rich menu 3. Unlink a rich menu for all users linked the rich menu
+// You can use this endpoint to batch control the rich menu linked to the users using the endpoint such as Link rich menu to user. The following operations are available:  1. Replace a rich menu with another rich menu for all users linked to a specific rich menu 2. Unlink a rich menu for all users linked to a specific rich menu 3. Unlink a rich menu for all users linked the rich menu
 // Parameters:
 //        richMenuBatchRequest
 
@@ -3463,7 +3473,7 @@ func (client *MessagingApiAPI) RichMenuBatch(
 // RichMenuBatch
 // If you want to take advantage of the HTTPResponse object for status codes and headers, use this signature.
 //
-// You can use this endpoint to batch control the rich menu linked to the users using the endpoint such as Link rich menu to user.  The following operations are available:  1. Replace a rich menu with another rich menu for all users linked to a specific rich menu 2. Unlink a rich menu for all users linked to a specific rich menu 3. Unlink a rich menu for all users linked the rich menu
+// You can use this endpoint to batch control the rich menu linked to the users using the endpoint such as Link rich menu to user. The following operations are available:  1. Replace a rich menu with another rich menu for all users linked to a specific rich menu 2. Unlink a rich menu for all users linked to a specific rich menu 3. Unlink a rich menu for all users linked the rich menu
 // Parameters:
 //        richMenuBatchRequest
 

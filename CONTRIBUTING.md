@@ -3,10 +3,10 @@
 First of all, thank you so much for taking your time to contribute! LINE Bot SDK for Go is not very different from any other open
 source projects you are aware of. It will be amazing if you could help us by doing any of the following:
 
-- File an issue in [the issue tracker](https://github.com/line/line-bot-sdk-go/issues) to report bugs and propose new features and
+- File an issue in [the issue tracker](https://github.com/MocA-Love/line-bot-sdk-go/issues) to report bugs and propose new features and
   improvements.
-- Ask a question using [the issue tracker](https://github.com/line/line-bot-sdk-go/issues).
-- Contribute your work by sending [a pull request](https://github.com/line/line-bot-sdk-go/pulls).
+- Ask a question using [the issue tracker](https://github.com/MocA-Love/line-bot-sdk-go/issues).
+- Contribute your work by sending [a pull request](https://github.com/MocA-Love/line-bot-sdk-go/pulls).
 
 ### Contributor license agreement
 
