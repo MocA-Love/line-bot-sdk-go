@@ -53,8 +53,6 @@ type StickerMessage struct {
 	 * Quote token of the message you want to quote.
 	 */
 	QuoteToken string `json:"quoteToken,omitempty"`
-
-	QuotedMessageID string `json:"quotedMessageId,omitempty"`
 }
 
 // MarshalJSON customizes the JSON serialization of the StickerMessage struct.

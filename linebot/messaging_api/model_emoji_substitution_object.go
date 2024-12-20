@@ -23,42 +23,27 @@ import (
 	"encoding/json"
 )
 
-// TextMessage
-// TextMessage
-// https://developers.line.biz/en/reference/messaging-api/#text-message
-type TextMessage struct {
-	Message
+// EmojiSubstitutionObject
+// An object representing a emoji substitution.
+// https://developers.line.biz/en/reference/messaging-api/#text-message-v2-emoji-object
+type EmojiSubstitutionObject struct {
+	SubstitutionObject
 
 	/**
-	 * Get QuickReply
+	 * Get ProductId
 	 */
-	QuickReply *QuickReply `json:"quickReply,omitempty"`
+	ProductId string `json:"productId"`
 
 	/**
-	 * Get Sender
+	 * Get EmojiId
 	 */
-	Sender *Sender `json:"sender,omitempty"`
-
-	/**
-	 * Get Text
-	 */
-	Text string `json:"text"`
-
-	/**
-	 * Get Emojis
-	 */
-	Emojis []Emoji `json:"emojis,omitempty"`
-
-	/**
-	 * Quote token of the message you want to quote.
-	 */
-	QuoteToken string `json:"quoteToken,omitempty"`
+	EmojiId string `json:"emojiId"`
 }
 
-// MarshalJSON customizes the JSON serialization of the TextMessage struct.
-func (r *TextMessage) MarshalJSON() ([]byte, error) {
+// MarshalJSON customizes the JSON serialization of the EmojiSubstitutionObject struct.
+func (r *EmojiSubstitutionObject) MarshalJSON() ([]byte, error) {
 
-	type Alias TextMessage
+	type Alias EmojiSubstitutionObject
 	return json.Marshal(&struct {
 		*Alias
 
@@ -66,6 +51,6 @@ func (r *TextMessage) MarshalJSON() ([]byte, error) {
 	}{
 		Alias: (*Alias)(r),
 
-		Type: "text",
+		Type: "emoji",
 	})
 }

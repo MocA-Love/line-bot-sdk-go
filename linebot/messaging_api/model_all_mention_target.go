@@ -23,37 +23,17 @@ import (
 	"encoding/json"
 )
 
-// ImageMessage
-// ImageMessage
-// https://developers.line.biz/en/reference/messaging-api/#image-message
-type ImageMessage struct {
-	Message
-
-	/**
-	 * Get QuickReply
-	 */
-	QuickReply *QuickReply `json:"quickReply,omitempty"`
-
-	/**
-	 * Get Sender
-	 */
-	Sender *Sender `json:"sender,omitempty"`
-
-	/**
-	 * Get OriginalContentUrl
-	 */
-	OriginalContentUrl string `json:"originalContentUrl"`
-
-	/**
-	 * Get PreviewImageUrl
-	 */
-	PreviewImageUrl string `json:"previewImageUrl"`
+// AllMentionTarget
+// AllMentionTarget
+// https://developers.line.biz/en/reference/messaging-api/#text-message-v2-mentionee-all
+type AllMentionTarget struct {
+	MentionTarget
 }
 
-// MarshalJSON customizes the JSON serialization of the ImageMessage struct.
-func (r *ImageMessage) MarshalJSON() ([]byte, error) {
+// MarshalJSON customizes the JSON serialization of the AllMentionTarget struct.
+func (r *AllMentionTarget) MarshalJSON() ([]byte, error) {
 
-	type Alias ImageMessage
+	type Alias AllMentionTarget
 	return json.Marshal(&struct {
 		*Alias
 
@@ -61,6 +41,6 @@ func (r *ImageMessage) MarshalJSON() ([]byte, error) {
 	}{
 		Alias: (*Alias)(r),
 
-		Type: "image",
+		Type: "all",
 	})
 }

@@ -23,10 +23,10 @@ import (
 	"encoding/json"
 )
 
-// TextMessage
-// TextMessage
-// https://developers.line.biz/en/reference/messaging-api/#text-message
-type TextMessage struct {
+// TextMessageV2
+// TextMessageV2
+// https://developers.line.biz/en/reference/messaging-api/#text-message-v2
+type TextMessageV2 struct {
 	Message
 
 	/**
@@ -45,9 +45,9 @@ type TextMessage struct {
 	Text string `json:"text"`
 
 	/**
-	 * Get Emojis
+	 * A mapping that specifies substitutions for parts enclosed in {} within the `text` field.
 	 */
-	Emojis []Emoji `json:"emojis,omitempty"`
+	Substitution map[string]SubstitutionObject `json:"substitution,omitempty"`
 
 	/**
 	 * Quote token of the message you want to quote.
@@ -55,10 +55,10 @@ type TextMessage struct {
 	QuoteToken string `json:"quoteToken,omitempty"`
 }
 
-// MarshalJSON customizes the JSON serialization of the TextMessage struct.
-func (r *TextMessage) MarshalJSON() ([]byte, error) {
+// MarshalJSON customizes the JSON serialization of the TextMessageV2 struct.
+func (r *TextMessageV2) MarshalJSON() ([]byte, error) {
 
-	type Alias TextMessage
+	type Alias TextMessageV2
 	return json.Marshal(&struct {
 		*Alias
 
@@ -66,6 +66,6 @@ func (r *TextMessage) MarshalJSON() ([]byte, error) {
 	}{
 		Alias: (*Alias)(r),
 
-		Type: "text",
+		Type: "textV2",
 	})
 }

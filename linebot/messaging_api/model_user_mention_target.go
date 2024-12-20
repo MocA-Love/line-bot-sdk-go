@@ -23,42 +23,22 @@ import (
 	"encoding/json"
 )
 
-// TextMessage
-// TextMessage
-// https://developers.line.biz/en/reference/messaging-api/#text-message
-type TextMessage struct {
-	Message
+// UserMentionTarget
+// UserMentionTarget
+// https://developers.line.biz/en/reference/messaging-api/#text-message-v2-mentionee-user
+type UserMentionTarget struct {
+	MentionTarget
 
 	/**
-	 * Get QuickReply
+	 * Get UserId
 	 */
-	QuickReply *QuickReply `json:"quickReply,omitempty"`
-
-	/**
-	 * Get Sender
-	 */
-	Sender *Sender `json:"sender,omitempty"`
-
-	/**
-	 * Get Text
-	 */
-	Text string `json:"text"`
-
-	/**
-	 * Get Emojis
-	 */
-	Emojis []Emoji `json:"emojis,omitempty"`
-
-	/**
-	 * Quote token of the message you want to quote.
-	 */
-	QuoteToken string `json:"quoteToken,omitempty"`
+	UserId string `json:"userId"`
 }
 
-// MarshalJSON customizes the JSON serialization of the TextMessage struct.
-func (r *TextMessage) MarshalJSON() ([]byte, error) {
+// MarshalJSON customizes the JSON serialization of the UserMentionTarget struct.
+func (r *UserMentionTarget) MarshalJSON() ([]byte, error) {
 
-	type Alias TextMessage
+	type Alias UserMentionTarget
 	return json.Marshal(&struct {
 		*Alias
 
@@ -66,6 +46,6 @@ func (r *TextMessage) MarshalJSON() ([]byte, error) {
 	}{
 		Alias: (*Alias)(r),
 
-		Type: "text",
+		Type: "user",
 	})
 }
