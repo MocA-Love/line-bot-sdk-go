@@ -8,13 +8,40 @@
 
 ## Introduction
 The LINE Messaging API SDK for Go makes it easy to develop bots using LINE Messaging API, and you can create a sample bot within minutes.
-Customized for personalized ease of use
+**Customized for personalized ease of use**
 
 
-## Diff
+## MaguRo Ed. Diff
 - Support QuotedMessageID
+```go
+func demo(event *linebot.Event) {
+	message := event.Message.(*linebot.TextMessage)
+	fmt.Println(message.QuotedMessageID)
+}
+```
+
 - Support QuoteToken
-- SUpport Mention (isSelf)
+```go
+func demo(event *linebot.Event) {
+	message := event.Message.(*linebot.TextMessage)
+	fmt.Println(message.QuoteToken)
+}
+```
+
+- Support Mention (isSelf)
+```go
+func demo(event *linebot.Event) {
+	message := event.Message.(*linebot.TextMessage)
+	if message.Mention != nil {
+		for _, mention := range message.Mention.Mentionees {
+			if mention.IsSelf {
+				fmt.Println("mentioned self !!")
+			}
+		}
+	}
+}
+```
+
 
 ## Documentation
 
