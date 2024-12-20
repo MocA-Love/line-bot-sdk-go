@@ -22,4 +22,5 @@ type Mentionee struct {
 	Length int                 `json:"length"`
 	Type   MentionedTargetType `json:"type"`
 	UserID string              `json:"userId,omitempty"`
+	IsSelf bool                `json:"isSelf"`
 }
