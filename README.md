@@ -14,6 +14,7 @@ Customized for personalized ease of use
 ## Diff
 - Support QuotedMessageID
 - Support QuoteToken
+- SUpport Mention (isSelf)
 
 ## Documentation
 
