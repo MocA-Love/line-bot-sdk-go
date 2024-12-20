@@ -11,6 +11,10 @@ The LINE Messaging API SDK for Go makes it easy to develop bots using LINE Messa
 Customized for personalized ease of use
 
 
+## Diff
+- Support QuotedMessageID
+- Support QuoteToken
+
 ## Documentation
 
 See the official API documentation for more information.
