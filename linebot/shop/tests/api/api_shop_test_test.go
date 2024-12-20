@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/line/line-bot-sdk-go/v8/linebot/shop"
+	"github.com/MocA-Love/line-bot-sdk-go/v8/linebot/shop"
 )
 
 func TestMissionStickerV3(t *testing.T) {

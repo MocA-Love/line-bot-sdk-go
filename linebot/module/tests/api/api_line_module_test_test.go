@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/line/line-bot-sdk-go/v8/linebot/module"
+	"github.com/MocA-Love/line-bot-sdk-go/v8/linebot/module"
 )
 
 func TestAcquireChatControl(t *testing.T) {

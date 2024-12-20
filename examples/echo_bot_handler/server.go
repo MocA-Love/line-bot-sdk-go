@@ -20,8 +20,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/line/line-bot-sdk-go/v8/linebot/messaging_api"
-	"github.com/line/line-bot-sdk-go/v8/linebot/webhook"
+	"github.com/MocA-Love/line-bot-sdk-go/v8/linebot/messaging_api"
+	"github.com/MocA-Love/line-bot-sdk-go/v8/linebot/webhook"
 )
 
 func main() {

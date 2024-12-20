@@ -32,7 +32,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/line/line-bot-sdk-go/v8/linebot"
+	"github.com/MocA-Love/line-bot-sdk-go/v8/linebot"
 )
 
 type MessagingApiBlobAPI struct {

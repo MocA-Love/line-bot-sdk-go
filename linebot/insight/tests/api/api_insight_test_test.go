@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/line/line-bot-sdk-go/v8/linebot/insight"
+	"github.com/MocA-Love/line-bot-sdk-go/v8/linebot/insight"
 )
 
 func TestGetFriendsDemographics(t *testing.T) {
