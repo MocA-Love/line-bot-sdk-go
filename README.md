@@ -32,11 +32,13 @@ func demo(event *linebot.Event) {
 ```go
 func demo(event *linebot.Event) {
 	message := event.Message.(*linebot.TextMessage)
-	if message.Mention != nil {
-		for _, mention := range message.Mention.Mentionees {
-			if mention.IsSelf {
-				fmt.Println("mentioned self !!")
-			}
+	if message.Mention == nil {
+		return
+	}
+
+	for _, mention := range message.Mention.Mentionees {
+		if mention.IsSelf {
+			fmt.Println("mentioned self !!")
 		}
 	}
 }
