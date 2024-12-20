@@ -19,20 +19,33 @@
 //go:generate python3 ../../generate-code.py
 package messaging_api
 
-// ShowLoadingAnimationRequest
-// ShowLoadingAnimationRequest
-// https://developers.line.biz/en/reference/messaging-api/#display-a-loading-indicator-request-body
-type ShowLoadingAnimationRequest struct {
+import (
+	"encoding/json"
+)
+
+// UserMentionTarget
+// UserMentionTarget
+// https://developers.line.biz/en/reference/messaging-api/#text-message-v2-mentionee-user
+type UserMentionTarget struct {
+	MentionTarget
 
 	/**
-	 * User ID of the target user for whom the loading animation is to be displayed. (Required)
+	 * Get UserId
 	 */
-	ChatId string `json:"chatId"`
+	UserId string `json:"userId"`
+}
 
-	/**
-	 * The number of seconds to display the loading indicator. It must be a multiple of 5. The maximum value is 60 seconds.
-	 * minimum: 5
-	 * maximum: 60
-	 */
-	LoadingSeconds int32 `json:"loadingSeconds,omitempty"`
+// MarshalJSON customizes the JSON serialization of the UserMentionTarget struct.
+func (r *UserMentionTarget) MarshalJSON() ([]byte, error) {
+
+	type Alias UserMentionTarget
+	return json.Marshal(&struct {
+		*Alias
+
+		Type string `json:"type"`
+	}{
+		Alias: (*Alias)(r),
+
+		Type: "user",
+	})
 }
